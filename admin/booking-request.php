@@ -77,6 +77,24 @@ $result = mysqli_query($conn, $sql);
                 <span class="hide-menu">Booking-Request</span>
               </a>
             </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="vaccines.php" aria-expanded="false">
+                <i class="ti ti-atom"></i>
+                <span class="hide-menu">Vaccines</span>
+              </a>
+            </li>
+             <li class="sidebar-item">
+              <a class="sidebar-link" href="vaccination-reports.php" aria-expanded="false">
+                <i class="ti ti-atom"></i>
+                <span class="hide-menu">Vaccination-Reports</span>
+              </a>
+            </li>
+             <li class="sidebar-item">
+              <a class="sidebar-link" href="vaccination-schedule.php" aria-expanded="false">
+                <i class="ti ti-atom"></i>
+                <span class="hide-menu">Vaccination-Schedule</span>
+              </a>
+            </li>
 
 
           </ul>
