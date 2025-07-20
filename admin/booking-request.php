@@ -1,6 +1,6 @@
 <?php
 include('inc.connection.php');
-$sql = "SELECT * FROM `users`";
+$sql = "SELECT * FROM `booking_requests`";
 $result = mysqli_query($conn, $sql);
 ?>
 
@@ -77,9 +77,7 @@ $result = mysqli_query($conn, $sql);
                 <span class="hide-menu">Booking-Request</span>
               </a>
             </li>
-            <!-- ---------------------------------- -->
-            <!-- Dashboard -->
-            <!-- ---------------------------------- -->
+
 
           </ul>
         </nav>
@@ -157,7 +155,7 @@ $result = mysqli_query($conn, $sql);
                 <div class="card-body">
                   <div class="d-md-flex align-items-center">
                     <div>
-                      <h4 class="card-title">USERS</h4>
+                      <h4 class="card-title">BOOKING_REQUEST</h4>
                       <!-- <p class="card-subtitle">
                         Ample Admin Vs Pixel Admin
                       </p> -->
@@ -171,29 +169,28 @@ $result = mysqli_query($conn, $sql);
                         <tr>
                         <tr>
                           <th scope="col" class="px-3 text-muted">Id</th>
-                          <th scope="col" class="px-3 text-muted">Name</th>
-                          <th scope="col" class="px-3 text-muted">Email</th>
-                          <th scope="col" class="px-3 text-muted">Password</th>
-                          <th scope="col" class="px-3 text-muted">Role</th>
-                          <th scope="col" class="px-3 text-muted">Phone</th>
-                          <th scope="col" class="px-3 text-muted">Address</th>
-                          <th scope="col" class="px-3 text-muted">Created_At</th>
+                          <th scope="col" class="px-3 text-muted">Parent-Id</th>
+                          <th scope="col" class="px-3 text-muted">Child-Id</th>
+                          <th scope="col" class="px-3 text-muted">Vaccine_Id</th>
+                          <th scope="col" class="px-3 text-muted">Hospital_Id</th>
+                          <th scope="col" class="px-3 text-muted">Preferred_Date</th>
+                          <th scope="col" class="px-3 text-muted">Status</th>
+                          <th scope="col" class="px-3 text-muted">Requested_At</th>
                       </thead>
                       <tbody>
                         <?php while ($row = mysqli_fetch_assoc($result)) { ?>
                           <tr>
                             <td class="px-3"><?php echo $row['id']; ?></td>
-                            <td class="px-3"><?php echo $row['name']; ?></td>
-                            <td class="px-3"><?php echo $row['email']; ?></td>
-                            <td class="px-3"><?php echo $row['password']; ?></td>
-                            <td class="px-3"><?php echo $row['role']; ?></td>
-                            <td class="px-3"><?php echo $row['phone']; ?></td>
-                            <td class="px-3"><?php echo $row['address']; ?></td>
-                            <td class="px-3"><?php echo $row['created_at']; ?></td>
+                            <td class="px-3"><?php echo $row['parent_id']; ?></td>
+                            <td class="px-3"><?php echo $row['child_id']; ?></td>
+                            <td class="px-3"><?php echo $row['vaccine_id']; ?></td>
+                            <td class="px-3"><?php echo $row['hospital_id']; ?></td>
+                            <td class="px-3"><?php echo $row['preferred_date']; ?></td>
+                            <td class="px-3"><?php echo $row['status']; ?></td>
+                            <td class="px-3"><?php echo $row['requested_at']; ?></td>
                           </tr>
                         <?php } ?>
                       </tbody>
-
 
                     </table>
                   </div>
