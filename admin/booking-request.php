@@ -59,7 +59,7 @@ $result = mysqli_query($conn, $sql);
           </div>
         </div>
         <!-- Sidebar navigation-->
-        <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+       <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
           <ul id="sidebarnav">
             <li class="nav-small-cap">
               <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4"></iconify-icon>
@@ -72,31 +72,18 @@ $result = mysqli_query($conn, $sql);
               </a>
             </li>
             <li class="sidebar-item">
+              <a class="sidebar-link" href="parent-requests.php" aria-expanded="false">
+                <i class="ti ti-atom"></i>
+                <span class="hide-menu">Parent Requests</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
               <a class="sidebar-link" href="booking-request.php" aria-expanded="false">
                 <i class="ti ti-atom"></i>
                 <span class="hide-menu">Booking-Request</span>
               </a>
             </li>
             <li class="sidebar-item">
-<<<<<<< HEAD
-              <a class="sidebar-link" href="vaccines.php" aria-expanded="false">
-                <i class="ti ti-atom"></i>
-                <span class="hide-menu">Vaccines</span>
-              </a>
-            </li>
-             <li class="sidebar-item">
-              <a class="sidebar-link" href="vaccination-reports.php" aria-expanded="false">
-                <i class="ti ti-atom"></i>
-                <span class="hide-menu">Vaccination-Reports</span>
-              </a>
-            </li>
-             <li class="sidebar-item">
-              <a class="sidebar-link" href="vaccination-schedule.php" aria-expanded="false">
-                <i class="ti ti-atom"></i>
-                <span class="hide-menu">Vaccination-Schedule</span>
-              </a>
-            </li>
-=======
               <a class="sidebar-link" href="hospitals.php" aria-expanded="false">
                 <i class="ti ti-atom"></i>
                 <span class="hide-menu">Hospitals</span>
@@ -109,15 +96,23 @@ $result = mysqli_query($conn, $sql);
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="parent-requests.php" aria-expanded="false">
+              <a class="sidebar-link" href="vaccines.php" aria-expanded="false">
                 <i class="ti ti-atom"></i>
-                <span class="hide-menu">Parent Requests</span>
+                <span class="hide-menu">Vaccines</span>
               </a>
             </li>
-
->>>>>>> 09f3c7e8abae3bb3bdaa7190676d9e65fa02167e
-
-
+             <li class="sidebar-item">
+              <a class="sidebar-link" href="vaccination-schedule.php" aria-expanded="false">
+                <i class="ti ti-atom"></i>
+                <span class="hide-menu">Vaccination-Schedule</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="vaccination-reports.php" aria-expanded="false">
+                <i class="ti ti-atom"></i>
+                <span class="hide-menu">Vaccination-Reports</span>
+              </a>
+            </li>
           </ul>
         </nav>
         <!-- End Sidebar navigation -->

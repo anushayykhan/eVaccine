@@ -59,7 +59,7 @@ $result = mysqli_query($conn, $sql);
           </div>
         </div>
         <!-- Sidebar navigation-->
-        <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+       <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
           <ul id="sidebarnav">
             <li class="nav-small-cap">
               <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4"></iconify-icon>
@@ -72,9 +72,27 @@ $result = mysqli_query($conn, $sql);
               </a>
             </li>
             <li class="sidebar-item">
+              <a class="sidebar-link" href="parent-requests.php" aria-expanded="false">
+                <i class="ti ti-atom"></i>
+                <span class="hide-menu">Parent Requests</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
               <a class="sidebar-link" href="booking-request.php" aria-expanded="false">
                 <i class="ti ti-atom"></i>
                 <span class="hide-menu">Booking-Request</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="hospitals.php" aria-expanded="false">
+                <i class="ti ti-atom"></i>
+                <span class="hide-menu">Hospitals</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="children-list.php" aria-expanded="false">
+                <i class="ti ti-atom"></i>
+                <span class="hide-menu">Children</span>
               </a>
             </li>
             <li class="sidebar-item">
@@ -84,18 +102,17 @@ $result = mysqli_query($conn, $sql);
               </a>
             </li>
              <li class="sidebar-item">
-              <a class="sidebar-link" href="vaccination-reports.php" aria-expanded="false">
-                <i class="ti ti-atom"></i>
-                <span class="hide-menu">Vaccination-Reports</span>
-              </a>
-            </li>
-             <li class="sidebar-item">
               <a class="sidebar-link" href="vaccination-schedule.php" aria-expanded="false">
                 <i class="ti ti-atom"></i>
                 <span class="hide-menu">Vaccination-Schedule</span>
               </a>
             </li>
-
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="vaccination-reports.php" aria-expanded="false">
+                <i class="ti ti-atom"></i>
+                <span class="hide-menu">Vaccination-Reports</span>
+              </a>
+            </li>
           </ul>
         </nav>
         <!-- End Sidebar navigation -->
