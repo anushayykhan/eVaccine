@@ -254,14 +254,14 @@ h6 {
 }
 
 .header .logo img {
-  max-height: 36px;
+  max-height: 100px;
   margin-right: 8px;
 }
 
 .header .logo h1 {
   font-size: 30px;
   margin: 0;
-  font-weight: 700;
+  font-weight: 2000;
   color: var(--heading-color);
 }
 
