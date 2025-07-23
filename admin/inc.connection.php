@@ -1,14 +1,16 @@
 <?php
-$servername = "localhost";
+ob_start();
+session_start();
+
+include('inc.functions.php');
+
+$hostname = "localhost";
 $username = "root";
 $password = "";
-$dbname = "vaccination_system";
+$database = "vaccination_system"; 
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = mysqli_connect($hostname, $username, $password, $database);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
 }
-?>

@@ -11,7 +11,7 @@ $result = mysqli_query($conn, $sql);
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>vaccine-system</title>
-  <link rel="shortcut icon" type="image/png" href="./assets/images/logos/favicon.png" />
+  <link rel="shortcut icon" type="image/png" href="./assets/images/logos/78a5fbc7-6bd6-4c64-a8fc-3b73e001733e.png-removebg-preview.png" />
   <link rel="stylesheet" href="./assets/css/styles.min.css" />
 </head>
 

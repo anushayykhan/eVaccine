@@ -1,53 +1,140 @@
+<?php
+require('inc.connection.php');
+
+$login = $email = $password = $Role = '';
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['loginBtn'])) {
+
+  $email = safe_input($_POST['email']);
+  $password = safe_input($_POST['password']);
+  $Role = safe_input($_POST['role']);
+
+  $sql = "SELECT * FROM `users` WHERE email = '$email'";
+  $result = mysqli_query($conn, $sql);
+
+  if (mysqli_num_rows($result) > 0) {
+    $user = mysqli_fetch_assoc($result);
+
+    // Check if password is correct
+   if (password_verify($password, $user['password'])) {
+
+  $_SESSION['logged_in'] = true;
+  $_SESSION['user_id'] = $user['id'];
+  $_SESSION['user_name'] = $user['name'];
+  $_SESSION['user_email'] = $user['email'];
+  $_SESSION['user_role'] = $user['role'];
+
+  // Redirect based on role
+  if ($user['role'] === 'admin') {
+    header('Location: index.php');
+  } elseif ($user['role'] === 'parent') {
+    header('Location: web/index.html');
+  } elseif ($user['role'] === 'hospital') {
+    header('Location: index.php');
+  } else {
+    $login = "Unknown role.";
+    session_unset();
+    session_destroy();
+  }
+
+  exit();
+
+} else {
+  $login = "Incorrect password.";
+}
+  } else {
+    $login = "Email not registered.";
+  }
+}
+?>
+
+
+
 <!doctype html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Flexy Free Bootstrap Admin Template by WrapPixel</title>
-  <link rel="shortcut icon" type="image/png" href="./assets/images/logos/favicon.png" />
+  <title>vaccine-system</title>
+  <link rel="shortcut icon" type="image/png" href="./assets/images/logos/78a5fbc7-6bd6-4c64-a8fc-3b73e001733e.png-removebg-preview.png" />
   <link rel="stylesheet" href="./assets/css/styles.min.css" />
+  <style>
+    .row .card-body img {
+      margin-top: -60px;
+      margin-bottom: -60px;
+      height: 250px;
+      width: 250px;
+      padding: 5px 0px;
+    }
+  </style>
+
 </head>
 
 <body>
-  <!--  Body Wrapper -->
-  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+  <!-- Background Blur Layer -->
+  <div class="bg-img-blur position-absolute top-0 start-0 w-100 h-100"></div>
+
+  <!-- Foreground Content -->
+  <div class="page-wrapper position-relative z-1" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
     data-sidebar-position="fixed" data-header-position="fixed">
-    <div
-      class="position-relative overflow-hidden text-bg-light min-vh-100 d-flex align-items-center justify-content-center">
+    <div class="position-relative min-vh-100 d-flex align-items-center justify-content-center">
       <div class="d-flex align-items-center justify-content-center w-100">
         <div class="row justify-content-center w-100">
-          <div class="col-md-8 col-lg-6 col-xxl-3">
-            <div class="card mb-0">
-              <div class="card-body">
-                <a href="./index.html" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                  <img src="./assets/images/logos/logo.svg" alt="">
-                </a>
-                <p class="text-center">Your Social Campaigns</p>
-                <form>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Username</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                  </div>
-                  <div class="mb-4">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
-                  </div>
-                  <div class="d-flex align-items-center justify-content-between mb-4">
-                    <div class="form-check">
-                      <input class="form-check-input primary" type="checkbox" value="" id="flexCheckChecked" checked>
-                      <label class="form-check-label text-dark" for="flexCheckChecked">
-                        Remeber this Device
-                      </label>
+          <div class="col-md-6 col-lg-5 col-xl-4">
+            <div class="card shadow-sm rounded-4 mb-0">
+              <div class="card-body p-4">
+
+                <!-- Logo -->
+                <div class="text-center mb-3">
+                  <img src="./assets/images/logos/2092fc4b-f777-437b-a14d-dbad6615c9c0-removebg-preview.png"
+                    alt="Logo"
+                    class="img-fluid"
+                    style="max-width: 200px; height: auto;">
+                </div>
+
+                <!-- Title -->
+                <p class="text-center mb-4" style="color: darkcyan; font-size: 1.1rem;"><b>Vaccination Management System</b></p>
+
+                <!-- Login Form -->
+                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+                  <?php if (!empty($login)): ?>
+                    <div class="alert alert-danger py-2 px-3 small" role="alert" style="font-size: 0.85rem;">
+                      <?= $login ?>
                     </div>
-                    <a class="text-primary fw-bold" href="./index.html">Forgot Password ?</a>
+                  <?php endif; ?>
+
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Your email</label>
+                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $email; ?>" required>
                   </div>
-                  <a href="./index.html" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign In</a>
-                  <div class="d-flex align-items-center justify-content-center">
-                    <p class="fs-4 mb-0 fw-bold">New to MaterialM?</p>
-                    <a class="text-primary fw-bold ms-2" href="./authentication-register.html">Create an account</a>
+
+                  <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" value="<?php echo $password; ?>" required>
                   </div>
+
+                  <div class="mb-3">
+                    <label for="role" class="form-label">Role</label>
+                    <select class="form-control" id="role" name="role" required>
+                      <option value="">Select Role</option>
+                      <option value="admin">Admin</option>
+                      <option value="hospital">Hospital</option>
+                      <option value="parent">Parent</option>
+                    </select>
+                  </div>
+
+                  <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                      Remember this device
+                    </label>
+                  </div>
+
+                  <button type="submit" name="loginBtn" class="btn btn-primary w-100 py-2 fs-5 rounded-2">Sign In</button>
                 </form>
+
+
+
               </div>
             </div>
           </div>
@@ -55,10 +142,11 @@
       </div>
     </div>
   </div>
+
   <script src="./assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="./assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- solar icons -->
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 </body>
+
 
 </html>
