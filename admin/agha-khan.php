@@ -1,15 +1,12 @@
 <?php
 include('inc.connection.php');
 
-$sql = "SELECT parent_requests.*, users.name AS parent_name 
-        FROM parent_requests 
-        LEFT JOIN users ON parent_requests.parent_id = users.id
-        ORDER BY parent_requests.id DESC";
-
+$sql = "SELECT hospitals.*, users.name AS creator_name 
+        FROM hospitals 
+        LEFT JOIN users ON hospitals.created_by = users.id";
 
 $result = mysqli_query($conn, $sql);
 ?>
-
 
 
 <!doctype html>
@@ -18,7 +15,7 @@ $result = mysqli_query($conn, $sql);
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>vaccine-system</title>
+    <title>agha-khan</title>
     <link rel="shortcut icon" type="image/png" href="./assets/images/logos/favicon.png" />
     <link rel="stylesheet" href="./assets/css/styles.min.css" />
 </head>
@@ -58,71 +55,24 @@ $result = mysqli_query($conn, $sql);
         <aside class="left-sidebar">
             <!-- Sidebar scroll-->
             <div>
-<<<<<<< HEAD
-                <div class="brand-logo d-flex align-items-center justify-content-between">
-                    <a href="./webindex.php" class="text-nowrap logo-img">
-                        <img src="assets/images/logos/logo.svg" alt="" />
-                    </a>
-                    <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
-                        <i class="ti ti-x fs-6"></i>
-                    </div>
-                </div>
-=======
-               
->>>>>>> 8c8de70e3cb476f876c057bc011ab0ac58a88ae7
+                
                 <!-- Sidebar navigation-->
-                <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
-          <ul id="sidebarnav">
-            <li class="nav-small-cap">
-              <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4"></iconify-icon>
-              <span class="hide-menu">Home</span>
-            </li>
+                 <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+                 <ul id="sidebarnav">
+                     <li class="nav-small-cap">
+                        <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4"></iconify-icon>
+                        <span class="hide-menu">Home</span>
+                     </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="index.php" aria-expanded="false">
+              <a class="sidebar-link" href="agha-khan.php" aria-expanded="false">
                 <i class="ti ti-atom"></i>
-                <span class="hide-menu">USER</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="parent-requests.php" aria-expanded="false">
-                <i class="ti ti-atom"></i>
-                <span class="hide-menu">Parent Requests</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="booking-request.php" aria-expanded="false">
-                <i class="ti ti-atom"></i>
-                <span class="hide-menu">Booking-Request</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="hospitals.php" aria-expanded="false">
-                <i class="ti ti-atom"></i>
-                <span class="hide-menu">Hospitals</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="children-list.php" aria-expanded="false">
-                <i class="ti ti-atom"></i>
-                <span class="hide-menu">Children</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="vaccines.php" aria-expanded="false">
-                <i class="ti ti-atom"></i>
-                <span class="hide-menu">Vaccines</span>
+                <span class="hide-menu">Vaccine-Reservation</span>
               </a>
             </li>
              <li class="sidebar-item">
-              <a class="sidebar-link" href="vaccination-schedule.php" aria-expanded="false">
+              <a class="sidebar-link" href="schedule.php" aria-expanded="false">
                 <i class="ti ti-atom"></i>
-                <span class="hide-menu">Vaccination-Schedule</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="vaccination-reports.php" aria-expanded="false">
-                <i class="ti ti-atom"></i>
-                <span class="hide-menu">Vaccination-Reports</span>
+                <span class="hide-menu">Schedule</span>
               </a>
             </li>
           </ul>
@@ -135,7 +85,7 @@ $result = mysqli_query($conn, $sql);
         <!--  Main wrapper -->
         <div class="body-wrapper">
             <!--  Header Start -->
-           
+            
             <!--  Header End -->
             <div class="body-wrapper-inner">
                 <div class="container-fluid">
@@ -147,7 +97,7 @@ $result = mysqli_query($conn, $sql);
                                 <div class="card-body">
                                     <div class="d-md-flex align-items-center">
                                         <div>
-                                            <h4 class="card-title">PARENT-REQUESTS</h4>
+                                            <h4 class="card-title">VACCINE RESERVATION</h4>
                                             <!-- <p class="card-subtitle">
                         Ample Admin Vs Pixel Admin
                       </p> -->
@@ -158,28 +108,34 @@ $result = mysqli_query($conn, $sql);
                                         <table class="table mb-0 text-nowrap varient-table align-middle fs-3">
                                             <thead>
                                                 <tr>
-                                                    <th class="px-3 text-muted">ID</th>
-                                                    <th class="px-3 text-muted">Parent</th>
-                                                    <th class="px-3 text-muted">Type</th>
-                                                    <th class="px-3 text-muted">Message</th>
-                                                    <th class="px-3 text-muted">Status</th>
-                                                    <th class="px-3 text-muted">Created At</th>
+                                                   <th scope="col" class="px-3 text-muted">Id</th>
+                                                    <th scope="col" class="px-3 text-muted">Parent-Id</th>
+                                                    <th scope="col" class="px-3 text-muted">Child-Id</th>
+                                                    <th scope="col" class="px-3 text-muted">Vaccine_Id</th>
+                                                    <th scope="col" class="px-3 text-muted">Hospital_Id</th>
+                                                    <th scope="col" class="px-3 text-muted">Preferred_Date</th>
+                                                    <th scope="col" class="px-3 text-muted">Status</th>
+                                                    <th scope="col" class="px-3 text-muted">Requested_At</th>
                                                 </tr>
                                             </thead>
+
                                             <tbody>
                                                 <?php while ($row = mysqli_fetch_assoc($result)) { ?>
-                                                    <tr>
-                                                        <td class="px-3"><?php echo $row['id']; ?></td>
-                                                        <td class="px-3"><?php echo $row['parent_name']; ?></td>
-                                                        <td class="px-3"><?php echo $row['request_type']; ?></td>
-                                                        <td class="px-3"><?php echo $row['message']; ?></td>
-                                                        <td class="px-3 text-capitalize"><?php echo $row['status']; ?></td>
-                                                        <td class="px-3"><?php echo $row['created_at']; ?></td>
-                                                    </tr>
-                                                <?php } ?>
+                          <tr>
+                            <td class="px-3"><?php echo $row['id']; ?></td>
+                            <td class="px-3"><?php echo $row['parent_id']; ?></td>
+                            <td class="px-3"><?php echo $row['child_id']; ?></td>
+                            <td class="px-3"><?php echo $row['vaccine_id']; ?></td>
+                            <td class="px-3"><?php echo $row['hospital_id']; ?></td>
+                            <td class="px-3"><?php echo $row['preferred_date']; ?></td>
+                            <td class="px-3"><?php echo $row['status']; ?></td>
+                            <td class="px-3"><?php echo $row['requested_at']; ?></td>
+                          </tr>
+                        <?php } ?>
                                             </tbody>
-                                        </table>
 
+
+                                        </table>
                                     </div>
                                 </div>
                             </div>

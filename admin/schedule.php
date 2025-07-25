@@ -15,7 +15,7 @@ $result = mysqli_query($conn, $sql);
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>vaccine-system</title>
+    <title>schedule</title>
     <link rel="shortcut icon" type="image/png" href="./assets/images/logos/favicon.png" />
     <link rel="stylesheet" href="./assets/css/styles.min.css" />
 </head>
@@ -55,18 +55,7 @@ $result = mysqli_query($conn, $sql);
         <aside class="left-sidebar">
             <!-- Sidebar scroll-->
             <div>
-<<<<<<< HEAD
-                <div class="brand-logo d-flex align-items-center justify-content-between">
-                    <a href="./webindex.php" class="text-nowrap logo-img">
-                        <img src="assets/images/logos/logo.svg" alt="" />
-                    </a>
-                    <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
-                        <i class="ti ti-x fs-6"></i>
-                    </div>
-                </div>
-=======
                 
->>>>>>> 8c8de70e3cb476f876c057bc011ab0ac58a88ae7
                 <!-- Sidebar navigation-->
                  <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
                  <ul id="sidebarnav">
@@ -75,51 +64,15 @@ $result = mysqli_query($conn, $sql);
                         <span class="hide-menu">Home</span>
                      </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="index.php" aria-expanded="false">
+              <a class="sidebar-link" href="agha-khan.php" aria-expanded="false">
                 <i class="ti ti-atom"></i>
-                <span class="hide-menu">USER</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="parent-requests.php" aria-expanded="false">
-                <i class="ti ti-atom"></i>
-                <span class="hide-menu">Parent Requests</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="booking-request.php" aria-expanded="false">
-                <i class="ti ti-atom"></i>
-                <span class="hide-menu">Booking-Request</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="hospitals.php" aria-expanded="false">
-                <i class="ti ti-atom"></i>
-                <span class="hide-menu">Hospitals</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="children-list.php" aria-expanded="false">
-                <i class="ti ti-atom"></i>
-                <span class="hide-menu">Children</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="vaccines.php" aria-expanded="false">
-                <i class="ti ti-atom"></i>
-                <span class="hide-menu">Vaccines</span>
+                <span class="hide-menu">Vaccine-Reservation</span>
               </a>
             </li>
              <li class="sidebar-item">
-              <a class="sidebar-link" href="vaccination-schedule.php" aria-expanded="false">
+              <a class="sidebar-link" href="schedule.php" aria-expanded="false">
                 <i class="ti ti-atom"></i>
-                <span class="hide-menu">Vaccination-Schedule</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="vaccination-reports.php" aria-expanded="false">
-                <i class="ti ti-atom"></i>
-                <span class="hide-menu">Vaccination-Reports</span>
+                <span class="hide-menu">Schedule</span>
               </a>
             </li>
           </ul>
@@ -144,7 +97,7 @@ $result = mysqli_query($conn, $sql);
                                 <div class="card-body">
                                     <div class="d-md-flex align-items-center">
                                         <div>
-                                            <h4 class="card-title">HOSPITALS</h4>
+                                            <h4 class="card-title">SCHEDULE</h4>
                                             <!-- <p class="card-subtitle">
                         Ample Admin Vs Pixel Admin
                       </p> -->
@@ -155,29 +108,24 @@ $result = mysqli_query($conn, $sql);
                                         <table class="table mb-0 text-nowrap varient-table align-middle fs-3">
                                             <thead>
                                                 <tr>
-                                                    <th class="px-3 text-muted">ID</th>
-                                                    <th class="px-3 text-muted">Name</th>
-                                                    <th class="px-3 text-muted">Email</th>
-                                                    <th class="px-3 text-muted">Phone</th>
-                                                    <th class="px-3 text-muted">Address</th>
-                                                    <th class="px-3 text-muted">Created By (User ID)</th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                <?php while ($row = mysqli_fetch_assoc($result)) { ?>
-                                                    <tr>
-                                                        <td class="px-3"><?php echo $row['id']; ?></td>
-                                                        <td class="px-3"><?php echo $row['name']; ?></td>
-                                                        <td class="px-3"><?php echo $row['email']; ?></td>
-                                                        <td class="px-3"><?php echo $row['phone']; ?></td>
-                                                        <td class="px-3"><?php echo $row['address']; ?></td>
-                                                        <td class="px-3">
-                                                            <?php echo $row['created_by'] . " - " . $row['creator_name']; ?>
-                                                        </td>
-
-                                                    </tr>
-                                                <?php } ?>
+<th scope="col" class="px-3 text-muted">Id</th>
+                          <th scope="col" class="px-3 text-muted">Child-Id</th>
+                          <th scope="col" class="px-3 text-muted">Vaccine-Id</th>
+                          <th scope="col" class="px-3 text-muted">Hospital-Id</th>
+                          <th scope="col" class="px-3 text-muted">Scheduled-Date</th>
+                          <th scope="col" class="px-3 text-muted">Status</th>
+                      </thead>
+                      <tbody>
+                        <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+                          <tr>
+                            <td class="px-3"><?php echo $row['id']; ?></td>
+                            <td class="px-3"><?php echo $row['child_id']; ?></td>
+                            <td class="px-3"><?php echo $row['vaccine_id']; ?></td>
+                            <td class="px-3"><?php echo $row['hospital_id']; ?></td>
+                            <td class="px-3"><?php echo $row['scheduled_date']; ?></td>
+                            <td class="px-3"><?php echo $row['status']; ?></td>
+                          </tr>
+                        <?php } ?>
                                             </tbody>
 
 
