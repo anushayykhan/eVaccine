@@ -25,9 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['loginBtn'])) {
 
   // Redirect based on role
   if ($user['role'] === 'admin') {
-    header('Location: index.php');
+   header('Location: index.php');
   } elseif ($user['role'] === 'parent') {
-    header('Location: web/index.html');
+    header('Location: ../webindex.php');
   } elseif ($user['role'] === 'hospital') {
     header('Location: index.php');
   } else {
@@ -123,11 +123,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['loginBtn'])) {
                     </select>
                   </div>
 
-                  <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" id="flexCheckChecked" checked>
-                    <label class="form-check-label" for="flexCheckChecked">
-                      Remember this device
-                    </label>
+                  <div class="d-flex align-items-center justify-content-between mb-4">
+                    <div class="form-check">
+                      <input class="form-check-input primary" type="checkbox" value="" id="flexCheckChecked" checked="">
+                      <label class="form-check-label text-dark" for="flexCheckChecked">
+                        Remeber this Device
+                      </label>
+                    </div>
+                    <a class="text-primary fw-bold" href="./register.php">Register ?</a>
                   </div>
 
                   <button type="submit" name="loginBtn" class="btn btn-primary w-100 py-2 fs-5 rounded-2">Sign In</button>

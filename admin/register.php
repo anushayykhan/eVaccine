@@ -110,13 +110,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['registerBtn'])) {
                     <input type="text" class="form-control form-control-sm" name="address" value="<?php echo $address; ?>" required>
                   </div>
 
-                  <div class="form-check mb-2">
-                    <input class="form-check-input" type="checkbox" id="rememberCheck" checked>
-                    <label class="form-check-label" for="rememberCheck">
-                      Remember this device
-                    </label>
-                  </div>
-
                   <button type="submit" name="registerBtn" class="btn btn-primary w-100 py-1 fs-6 rounded-2">Register</button>
 
                 </form>
