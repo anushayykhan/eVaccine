@@ -1,6 +1,10 @@
 <?php
 include('inc.connection.php');
 $sql = "SELECT * FROM `booking_requests`";
+$sql = "SELECT booking_requests.*, hospitals.name AS hospital_name 
+        FROM booking_requests
+        JOIN hospitals ON booking_requests.hospital_id = hospitals.id
+        WHERE hospitals.name = 'Agha Khan'";
 $result = mysqli_query($conn, $sql);
 ?>
 
