@@ -1,12 +1,22 @@
 <?php
 include('inc.connection.php');
 
-$sql = "SELECT hospitals.*, users.name AS creator_name 
-        FROM hospitals 
-        LEFT JOIN users ON hospitals.created_by = users.id";
+// Hospital IDs to show (you can expand this as needed)
+$hospital_ids = [1, 2, 3];
 
-$result = mysqli_query($conn, $sql);
+// Fetch data for each hospital
+$hospital_data = [];
+
+foreach ($hospital_ids as $hospital_id) {
+    $sql = "SELECT booking_requests.*, hospitals.name AS hospital_name 
+            FROM booking_requests
+            JOIN hospitals ON booking_requests.hospital_id = hospitals.id
+            WHERE hospitals.id = $hospital_id";
+    $result = mysqli_query($conn, $sql);
+    $hospital_data[$hospital_id] = $result;
+}
 ?>
+
 
 
 <!doctype html>
