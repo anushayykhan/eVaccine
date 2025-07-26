@@ -1,7 +1,6 @@
 <?php
 include('inc.connection.php');
 
-<<<<<<< HEAD
 $sql = "SELECT 
             br.*, 
             u.name AS parent_name, 
@@ -15,22 +14,8 @@ $sql = "SELECT
         LEFT JOIN hospitals h ON br.hospital_id = h.id
         WHERE br.hospital_id = 1";
 
-=======
-// Hospital IDs to show (you can expand this as needed)
-$hospital_ids = [1, 2, 3];
->>>>>>> b1c16ff1ec05c2f70d65979cca8a337ef71631e0
 
-// Fetch data for each hospital
-$hospital_data = [];
-
-foreach ($hospital_ids as $hospital_id) {
-    $sql = "SELECT booking_requests.*, hospitals.name AS hospital_name 
-            FROM booking_requests
-            JOIN hospitals ON booking_requests.hospital_id = hospitals.id
-            WHERE hospitals.id = $hospital_id";
-    $result = mysqli_query($conn, $sql);
-    $hospital_data[$hospital_id] = $result;
-}
+$result = mysqli_query($conn, $sql);
 ?>
 
 

@@ -1,14 +1,10 @@
 <?php
 include('inc.connection.php');
-<<<<<<< HEAD
 
 $sql = "SELECT booking_requests.*, hospitals.name AS hospital_name 
         FROM booking_requests
         JOIN hospitals ON booking_requests.hospital_id = hospitals.id";
 
-=======
-$sql = "SELECT * FROM `booking_requests`";
->>>>>>> b1c16ff1ec05c2f70d65979cca8a337ef71631e0
 $result = mysqli_query($conn, $sql);
 // Approve action
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['approveBtn'])) {
