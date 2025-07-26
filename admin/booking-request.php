@@ -1,12 +1,36 @@
 <?php
 include('inc.connection.php');
-$sql = "SELECT * FROM `booking_requests`";
+
 $sql = "SELECT booking_requests.*, hospitals.name AS hospital_name 
         FROM booking_requests
-        JOIN hospitals ON booking_requests.hospital_id = hospitals.id
-        WHERE hospitals.name = 'Agha Khan'";
+        JOIN hospitals ON booking_requests.hospital_id = hospitals.id";
+
 $result = mysqli_query($conn, $sql);
+// Approve action
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['approveBtn'])) {
+  $booking_id = $_POST['booking_id'];
+  $child_id = $_POST['child_id'];
+  $vaccine_id = $_POST['vaccine_id'];
+  $hospital_id = $_POST['hospital_id'];
+  $preferred_date = $_POST['preferred_date'];
+
+  $insert_schedule = "INSERT INTO vaccination_schedule (child_id, vaccine_id, hospital_id, scheduled_date, status)
+                      VALUES ('$child_id', '$vaccine_id', '$hospital_id', '$preferred_date', 'Pending')";
+  mysqli_query($conn, $insert_schedule);
+
+  $update_booking = "UPDATE booking_requests SET status = 'Approved' WHERE id = '$booking_id'";
+  mysqli_query($conn, $update_booking);
+}
+
+// Reject action
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['rejectBtn'])) {
+  $booking_id = $_POST['booking_id'];
+  $delete_booking = "DELETE FROM booking_requests WHERE id = '$booking_id'";
+  mysqli_query($conn, $delete_booking);
+}
+
 ?>
+
 
 <!doctype html>
 <html lang="en">
@@ -25,36 +49,12 @@ $result = mysqli_query($conn, $sql);
     data-sidebar-position="fixed" data-header-position="fixed">
 
     <!--  App Topstrip -->
-    <div class="app-topstrip bg-dark py-6 px-3 w-100 d-lg-flex align-items-center justify-content-between">
-      <div class="d-flex align-items-center justify-content-center gap-5 mb-2 mb-lg-0">
-        <a class="d-flex justify-content-center" href="#">
-          <img src="assets/images/logos/logo-wrappixel.svg" alt="" width="150">
-        </a>
 
-
-      </div>
-
-      <div class="d-lg-flex align-items-center gap-2">
-        <h3 class="text-white mb-2 mb-lg-0 fs-5 text-center">Check Flexy Premium Version</h3>
-        <div class="d-flex align-items-center justify-content-center gap-2">
-
-          <div class="dropdown d-flex">
-            <a class="btn btn-primary d-flex align-items-center gap-1 " href="javascript:void(0)" id="drop4"
-              data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="ti ti-shopping-cart fs-5"></i>
-              Buy Now
-              <i class="ti ti-chevron-down fs-5"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-    </div>
     <!-- Sidebar Start -->
     <aside class="left-sidebar">
       <!-- Sidebar scroll-->
       <div>
-<<<<<<< HEAD
+
         <div class="brand-logo d-flex align-items-center justify-content-between">
           <a href="./webindex.php" class="text-nowrap logo-img">
             <img src="assets/images/logos/logo.svg" alt="" />
@@ -63,11 +63,9 @@ $result = mysqli_query($conn, $sql);
             <i class="ti ti-x fs-6"></i>
           </div>
         </div>
-=======
-       
->>>>>>> 8c8de70e3cb476f876c057bc011ab0ac58a88ae7
+
         <!-- Sidebar navigation-->
-       <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+        <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
           <ul id="sidebarnav">
             <li class="nav-small-cap">
               <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4"></iconify-icon>
@@ -109,7 +107,7 @@ $result = mysqli_query($conn, $sql);
                 <span class="hide-menu">Vaccines</span>
               </a>
             </li>
-             <li class="sidebar-item">
+            <li class="sidebar-item">
               <a class="sidebar-link" href="vaccination-schedule.php" aria-expanded="false">
                 <i class="ti ti-atom"></i>
                 <span class="hide-menu">Vaccination-Schedule</span>
@@ -130,9 +128,61 @@ $result = mysqli_query($conn, $sql);
     <!--  Sidebar End -->
     <!--  Main wrapper -->
     <div class="body-wrapper">
-      <!--  Header Start -->
-      
-      <!--  Header End -->
+      <header class="app-header">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <ul class="navbar-nav">
+            <li class="nav-item d-block d-xl-none">
+              <a class="nav-link sidebartoggler " id="headerCollapse" href="javascript:void(0)">
+                <i class="ti ti-menu-2"></i>
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link " href="javascript:void(0)" id="drop1" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="ti ti-bell"></i>
+                <div class="notification bg-primary rounded-circle"></div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-animate-up" aria-labelledby="drop1">
+                <div class="message-body">
+                  <a href="javascript:void(0)" class="dropdown-item">
+                    Item 1
+                  </a>
+                  <a href="javascript:void(0)" class="dropdown-item">
+                    Item 2
+                  </a>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+            <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+
+              <li class="nav-item dropdown">
+                <a class="nav-link " href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  <img src="./assets/images/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">
+                </a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                  <div class="message-body">
+                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="ti ti-user fs-6"></i>
+                      <p class="mb-0 fs-3">My Profile</p>
+                    </a>
+                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="ti ti-mail fs-6"></i>
+                      <p class="mb-0 fs-3">My Account</p>
+                    </a>
+                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="ti ti-list-check fs-6"></i>
+                      <p class="mb-0 fs-3">My Task</p>
+                    </a>
+                    <a href="./authentication-login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
       <div class="body-wrapper-inner">
         <div class="container-fluid">
           <!--  Row 1 -->
@@ -144,9 +194,7 @@ $result = mysqli_query($conn, $sql);
                   <div class="d-md-flex align-items-center">
                     <div>
                       <h4 class="card-title">BOOKING_REQUEST</h4>
-                      <!-- <p class="card-subtitle">
-                        Ample Admin Vs Pixel Admin
-                      </p> -->
+                      
                     </div>
 
                   </div>
@@ -162,8 +210,8 @@ $result = mysqli_query($conn, $sql);
                           <th scope="col" class="px-3 text-muted">Vaccine_Id</th>
                           <th scope="col" class="px-3 text-muted">Hospital_Id</th>
                           <th scope="col" class="px-3 text-muted">Preferred_Date</th>
-                          <th scope="col" class="px-3 text-muted">Status</th>
                           <th scope="col" class="px-3 text-muted">Requested_At</th>
+                          <th scope="col" class="px-3 text-muted">Status</th>
                       </thead>
                       <tbody>
                         <?php while ($row = mysqli_fetch_assoc($result)) { ?>
@@ -174,8 +222,30 @@ $result = mysqli_query($conn, $sql);
                             <td class="px-3"><?php echo $row['vaccine_id']; ?></td>
                             <td class="px-3"><?php echo $row['hospital_id']; ?></td>
                             <td class="px-3"><?php echo $row['preferred_date']; ?></td>
-                            <td class="px-3"><?php echo $row['status']; ?></td>
                             <td class="px-3"><?php echo $row['requested_at']; ?></td>
+                            <td class="px-3">
+                              <?php
+                              $today = date('Y-m-d');
+                              $is_missed = ($row['status'] === 'Pending' && $row['preferred_date'] < $today);
+
+                              if ($row['status'] === 'Approved') {
+                                echo "<span class='badge bg-success'>Approved</span>";
+                              } elseif ($is_missed) {
+                                echo "<span class='badge bg-danger'>Missed</span>";
+                              } else { ?>
+                                <form method="post" style="display: flex; gap: 5px;">
+                                  <input type="hidden" name="booking_id" value="<?php echo $row['id']; ?>">
+                                  <input type="hidden" name="child_id" value="<?php echo $row['child_id']; ?>">
+                                  <input type="hidden" name="vaccine_id" value="<?php echo $row['vaccine_id']; ?>">
+                                  <input type="hidden" name="hospital_id" value="<?php echo $row['hospital_id']; ?>">
+                                  <input type="hidden" name="preferred_date" value="<?php echo $row['preferred_date']; ?>">
+                                  <button type="submit" name="approveBtn" class="btn btn-sm btn-success">Approve</button>
+                                  <button type="submit" name="rejectBtn" class="btn btn-sm btn-danger">Reject</button>
+                                </form>
+                              <?php } ?>
+                            </td>
+
+
                           </tr>
                         <?php } ?>
                       </tbody>

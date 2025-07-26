@@ -21,49 +21,47 @@ $result = mysqli_query($conn, $sql);
     data-sidebar-position="fixed" data-header-position="fixed">
 
     <!--  App Topstrip -->
-    <div class="app-topstrip bg-dark py-6 px-3 w-100 d-lg-flex align-items-center justify-content-between">
-      <div class="d-flex align-items-center justify-content-center gap-5 mb-2 mb-lg-0">
-        <a class="d-flex justify-content-center" href="#">
-          <img src="assets/images/logos/logo-wrappixel.svg" alt="" width="150">
-        </a>
-
-
-      </div>
-
-      <div class="d-lg-flex align-items-center gap-2">
-        <h3 class="text-white mb-2 mb-lg-0 fs-5 text-center">Check Flexy Premium Version</h3>
-        <div class="d-flex align-items-center justify-content-center gap-2">
-
-          <div class="dropdown d-flex">
-            <a class="btn btn-primary d-flex align-items-center gap-1 " href="javascript:void(0)" id="drop4"
-              data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="ti ti-shopping-cart fs-5"></i>
-              Buy Now
-              <i class="ti ti-chevron-down fs-5"></i>
-            </a>
-          </div>
+   <div class="app-topstrip py-6 px-3 w-100 d-lg-flex align-items-center justify-content-between"
+     style="background-color: #b6e2e4; align-items: center; height: 70px;">
+  
+     <div class="brand-logo d-flex align-items-center justify-content-between">
+          <a href="./webindex.php" class="text-nowrap logo-img">
+            <img src="assets/images/logos/7e06b2c1-8c53-45c0-bd0c-e7c613a0910d-removebg-preview.png" alt="" />
+          </a>
         </div>
-      </div>
-
+ <!-- Sliding Text -->
+<div class="flex-grow-1 justify-content-end">
+  <div class="text-slide-container" style="width: 100%; max-width: 1200px; overflow: hidden; position: relative;">
+    <div class="text-slide-content"
+         style="white-space: nowrap; display: inline-block; animation: slideText 20s linear infinite; padding-left: 50px;">
+      <span style="font-size: 18px; font-weight: 600; color: #025f66; margin-right: 90px;">
+        Welcome to the Admin Panel — Efficiently Manage E-Vaccination Records with Confidence and Control.
+      </span>
     </div>
+  </div>
+</div>
+</div>
+<style>
+@keyframes slideText {
+  0% { transform: translateX(70%); }   /* start slightly more to the right */
+  100% { transform: translateX(-100%); }
+}
+
+.brand-logo img{
+  height: 170px;
+  margin-bottom: -30px;
+  margin-left: -40px;
+  margin-top: -30px;
+  padding: 10px 10px;
+}
+</style>
     <!-- Sidebar Start -->
-    <aside class="left-sidebar">
+    <aside class="left-sidebar" style="margin-top: 7px;">
       <!-- Sidebar scroll-->
       <div>
-<<<<<<< HEAD
-        <div class="brand-logo d-flex align-items-center justify-content-between">
-          <a href="./webindex.php" class="text-nowrap logo-img">
-            <img src="assets/images/logos/logo.svg" alt="" />
-          </a>
-          <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
-            <i class="ti ti-x fs-6"></i>
-          </div>
-        </div>
-=======
-       
->>>>>>> 8c8de70e3cb476f876c057bc011ab0ac58a88ae7
+
         <!-- Sidebar navigation-->
-       <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+       <nav class="sidebar-nav scroll-sidebar"  data-simplebar="">
           <ul id="sidebarnav">
             <li class="nav-small-cap">
               <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4"></iconify-icon>
@@ -71,13 +69,13 @@ $result = mysqli_query($conn, $sql);
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link" href="index.php" aria-expanded="false">
-                <i class="ti ti-atom"></i>
+                <i class="ti ti-user"></i>
                 <span class="hide-menu">USER</span>
               </a>
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link" href="parent-requests.php" aria-expanded="false">
-                <i class="ti ti-atom"></i>
+                <i class="ti ti-comments"></i>
                 <span class="hide-menu">Parent Requests</span>
               </a>
             </li>
@@ -127,7 +125,61 @@ $result = mysqli_query($conn, $sql);
     <!--  Main wrapper -->
     <div class="body-wrapper">
       <!--  Header Start -->
-     
+     <header class="app-header">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <ul class="navbar-nav">
+            <li class="nav-item d-block d-xl-none">
+              <a class="nav-link sidebartoggler " id="headerCollapse" href="javascript:void(0)">
+                <i class="ti ti-menu-2"></i>
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link " href="javascript:void(0)" id="drop1" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="ti ti-bell"></i>
+                <div class="notification bg-primary rounded-circle"></div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-animate-up" aria-labelledby="drop1">
+                <div class="message-body">
+                  <a href="javascript:void(0)" class="dropdown-item">
+                    Item 1
+                  </a>
+                  <a href="javascript:void(0)" class="dropdown-item">
+                    Item 2
+                  </a>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+            <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+               
+              <li class="nav-item dropdown">
+                <a class="nav-link " href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  <img src="./assets/images/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">
+                </a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                  <div class="message-body">
+                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="ti ti-user fs-6"></i>
+                      <p class="mb-0 fs-3">My Profile</p>
+                    </a>
+                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="ti ti-mail fs-6"></i>
+                      <p class="mb-0 fs-3">My Account</p>
+                    </a>
+                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="ti ti-list-check fs-6"></i>
+                      <p class="mb-0 fs-3">My Task</p>
+                    </a>
+                    <a href="../Login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
       <!--  Header End -->
       <div class="body-wrapper-inner">
         <div class="container-fluid">

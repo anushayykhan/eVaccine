@@ -1,9 +1,19 @@
 <?php
 include('inc.connection.php');
 
-$sql = "SELECT hospitals.*, users.name AS creator_name 
-        FROM hospitals 
-        LEFT JOIN users ON hospitals.created_by = users.id";
+$sql = "SELECT 
+            br.*, 
+            u.name AS parent_name, 
+            c.name AS child_name, 
+            v.name AS vaccine_name, 
+            h.name AS hospital_name
+        FROM booking_requests br
+        LEFT JOIN users u ON br.parent_id = u.id
+        LEFT JOIN children c ON br.child_id = c.id
+        LEFT JOIN vaccines v ON br.vaccine_id = v.id
+        LEFT JOIN hospitals h ON br.hospital_id = h.id
+        WHERE br.hospital_id = 2";
+
 
 $result = mysqli_query($conn, $sql);
 ?>
@@ -26,57 +36,33 @@ $result = mysqli_query($conn, $sql);
         data-sidebar-position="fixed" data-header-position="fixed">
 
         <!--  App Topstrip -->
-        <div class="app-topstrip bg-dark py-6 px-3 w-100 d-lg-flex align-items-center justify-content-between">
-            <div class="d-flex align-items-center justify-content-center gap-5 mb-2 mb-lg-0">
-                <a class="d-flex justify-content-center" href="#">
-                    <img src="assets/images/logos/logo-wrappixel.svg" alt="" width="150">
-                </a>
 
-
-            </div>
-
-            <div class="d-lg-flex align-items-center gap-2">
-                <h3 class="text-white mb-2 mb-lg-0 fs-5 text-center">Check Flexy Premium Version</h3>
-                <div class="d-flex align-items-center justify-content-center gap-2">
-
-                    <div class="dropdown d-flex">
-                        <a class="btn btn-primary d-flex align-items-center gap-1 " href="javascript:void(0)" id="drop4"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="ti ti-shopping-cart fs-5"></i>
-                            Buy Now
-                            <i class="ti ti-chevron-down fs-5"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
         <!-- Sidebar Start -->
         <aside class="left-sidebar">
             <!-- Sidebar scroll-->
             <div>
-                
+
                 <!-- Sidebar navigation-->
-                 <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
-                 <ul id="sidebarnav">
-                     <li class="nav-small-cap">
-                        <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4"></iconify-icon>
-                        <span class="hide-menu">Home</span>
-                     </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="agha-khan.php" aria-expanded="false">
-                <i class="ti ti-atom"></i>
-                <span class="hide-menu">Vaccine-Reservation</span>
-              </a>
-            </li>
-             <li class="sidebar-item">
-              <a class="sidebar-link" href="schedule.php" aria-expanded="false">
-                <i class="ti ti-atom"></i>
-                <span class="hide-menu">Schedule</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
+                <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+                    <ul id="sidebarnav">
+                        <li class="nav-small-cap">
+                            <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4"></iconify-icon>
+                            <span class="hide-menu">Home</span>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="agha-khan.php" aria-expanded="false">
+                                <i class="ti ti-atom"></i>
+                                <span class="hide-menu">Vaccine-Reservation</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="agha-schedule.php" aria-expanded="false">
+                                <i class="ti ti-atom"></i>
+                                <span class="hide-menu">Schedule</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
@@ -85,7 +71,7 @@ $result = mysqli_query($conn, $sql);
         <!--  Main wrapper -->
         <div class="body-wrapper">
             <!--  Header Start -->
-            
+
             <!--  Header End -->
             <div class="body-wrapper-inner">
                 <div class="container-fluid">
@@ -108,12 +94,11 @@ $result = mysqli_query($conn, $sql);
                                         <table class="table mb-0 text-nowrap varient-table align-middle fs-3">
                                             <thead>
                                                 <tr>
-                                                   <th scope="col" class="px-3 text-muted">Id</th>
-                                                    <th scope="col" class="px-3 text-muted">Parent-Id</th>
-                                                    <th scope="col" class="px-3 text-muted">Child-Id</th>
-                                                    <th scope="col" class="px-3 text-muted">Vaccine_Id</th>
-                                                    <th scope="col" class="px-3 text-muted">Hospital_Id</th>
-                                                    <th scope="col" class="px-3 text-muted">Preferred_Date</th>
+                                                    <th scope="col" class="px-3 text-muted">Parent_name</th>
+                                                    <th scope="col" class="px-3 text-muted">Child_name</th>
+                                                    <th scope="col" class="px-3 text-muted">Vaccine_name</th>
+                                                    <th scope="col" class="px-3 text-muted">Hospital_name</th>
+                                                    <th scope="col" class="px-3 text-muted">Preferred_date</th>
                                                     <th scope="col" class="px-3 text-muted">Status</th>
                                                     <th scope="col" class="px-3 text-muted">Requested_At</th>
                                                 </tr>
@@ -121,17 +106,17 @@ $result = mysqli_query($conn, $sql);
 
                                             <tbody>
                                                 <?php while ($row = mysqli_fetch_assoc($result)) { ?>
-                          <tr>
-                            <td class="px-3"><?php echo $row['id']; ?></td>
-                            <td class="px-3"><?php echo $row['parent_id']; ?></td>
-                            <td class="px-3"><?php echo $row['child_id']; ?></td>
-                            <td class="px-3"><?php echo $row['vaccine_id']; ?></td>
-                            <td class="px-3"><?php echo $row['hospital_id']; ?></td>
-                            <td class="px-3"><?php echo $row['preferred_date']; ?></td>
-                            <td class="px-3"><?php echo $row['status']; ?></td>
-                            <td class="px-3"><?php echo $row['requested_at']; ?></td>
-                          </tr>
-                        <?php } ?>
+                                                    <tr>
+                                                        <td class="px-3"><?php echo $row['parent_name']; ?></td>
+                                                        <td class="px-3"><?php echo $row['child_name']; ?></td>
+                                                        <td class="px-3"><?php echo $row['vaccine_name']; ?></td>
+                                                        <td class="px-3"><?php echo $row['hospital_name']; ?></td>
+                                                        <td class="px-3"><?php echo $row['preferred_date']; ?></td>
+                                                        <td class="px-3"><?php echo $row['status']; ?></td>
+                                                        <td class="px-3"><?php echo $row['requested_at']; ?></td>
+
+                                                    </tr>
+                                                <?php } ?>
                                             </tbody>
 
 

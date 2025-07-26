@@ -5,7 +5,7 @@
 // }
 
 include('inc.connection.php');
-$sql = "SELECT * FROM `users`";
+$sql = "SELECT * FROM `users` WHERE role = 'admin'";
 $result = mysqli_query($conn, $sql);
 ?>
 
@@ -26,7 +26,7 @@ $result = mysqli_query($conn, $sql);
     data-sidebar-position="fixed" data-header-position="fixed">
 
     <!--  App Topstrip -->
-
+  
     <!-- Sidebar Start -->
     <aside class="left-sidebar">
       <!-- Sidebar scroll-->
@@ -48,32 +48,32 @@ $result = mysqli_query($conn, $sql);
               <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4"></iconify-icon>
               <span class="hide-menu">Home</span>
             </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
-                <i class="ti ti-atom"></i>
-                <span class="hide-menu">USER</span>
-              </a>
-              <ul class="collapse first-level">
-                <li class="sidebar-item">
-                  <a href="admin-detail.php" class="sidebar-link">
-                    <i class="ti ti-user-plus"></i>
-                    <span class="hide-menu">Admin</span>
-                  </a>
-                </li>
-                <li class="sidebar-item">
-                  <a href="hospital-detail.php" class="sidebar-link">
-                    <i class="ti ti-users"></i>
-                    <span class="hide-menu">Hospital</span>
-                  </a>
-                </li>
-                <li class="sidebar-item">
-                  <a href="parent-detail.php" class="sidebar-link">
-                    <i class="ti ti-users"></i>
-                    <span class="hide-menu">Parent</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
+           <li class="sidebar-item">
+  <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+    <i class="ti ti-atom"></i>
+    <span class="hide-menu">USER</span>
+  </a>
+  <ul class="collapse first-level">
+    <li class="sidebar-item">
+      <a href="admin-detail.php" class="sidebar-link">
+        <i class="ti ti-user-plus"></i>
+        <span class="hide-menu">Admin</span>
+      </a>
+    </li>
+    <li class="sidebar-item">
+      <a href="hospital-detail.php" class="sidebar-link">
+        <i class="ti ti-users"></i>
+        <span class="hide-menu">Hospital</span>
+      </a>
+    </li>
+    <li class="sidebar-item">
+      <a href="parent-detail.php" class="sidebar-link">
+        <i class="ti ti-users"></i>
+        <span class="hide-menu">Parent</span>
+      </a>
+    </li>
+  </ul>
+</li>
 
             <li class="sidebar-item">
               <a class="sidebar-link" href="parent-requests.php" aria-expanded="false">
@@ -106,30 +106,10 @@ $result = mysqli_query($conn, $sql);
               </a>
             </li>
              <li class="sidebar-item">
-              <a class="sidebar-link has-arrow" href="vaccination-schedule.php" aria-expanded="false">
+              <a class="sidebar-link" href="vaccination-schedule.php" aria-expanded="false">
                 <i class="ti ti-atom"></i>
-                <span class="hide-menu">Vaccination-schedule</span>
+                <span class="hide-menu">Vaccination-Schedule</span>
               </a>
-              <ul class="collapse first-level">
-                <li class="sidebar-item">
-                  <a href="agha-khan.php" class="sidebar-link">
-                    <i class="ti ti-user-plus"></i>
-                    <span class="hide-menu">Agha-khan</span>
-                  </a>
-                </li>
-                <li class="sidebar-item">
-                  <a href="pns-shifa.php" class="sidebar-link">
-                    <i class="ti ti-users"></i>
-                    <span class="hide-menu">Pns-shifa</span>
-                  </a>
-                </li>
-                <li class="sidebar-item">
-                  <a href="south-city.php" class="sidebar-link">
-                    <i class="ti ti-users"></i>
-                    <span class="hide-menu">South-city</span>
-                  </a>
-                </li>
-              </ul>
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link" href="vaccination-reports.php" aria-expanded="false">
@@ -146,8 +126,7 @@ $result = mysqli_query($conn, $sql);
     <!--  Sidebar End -->
     <!--  Main wrapper -->
     <div class="body-wrapper">
-      <!--  Header Start -->
-      <header class="app-header">
+       <header class="app-header">
         <nav class="navbar navbar-expand-lg navbar-light">
           <ul class="navbar-nav">
             <li class="nav-item d-block d-xl-none">
@@ -174,7 +153,7 @@ $result = mysqli_query($conn, $sql);
           </ul>
           <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
             <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-
+               
               <li class="nav-item dropdown">
                 <a class="nav-link " href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                   aria-expanded="false">
@@ -194,7 +173,7 @@ $result = mysqli_query($conn, $sql);
                       <i class="ti ti-list-check fs-6"></i>
                       <p class="mb-0 fs-3">My Task</p>
                     </a>
-                    <a href="login.php" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                    <a href="./authentication-login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                   </div>
                 </div>
               </li>
@@ -202,7 +181,6 @@ $result = mysqli_query($conn, $sql);
           </div>
         </nav>
       </header>
-      <!--  Header End -->
       <div class="body-wrapper-inner">
         <div class="container-fluid">
           <!--  Row 1 -->

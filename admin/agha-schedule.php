@@ -43,13 +43,13 @@ $result = mysqli_query($conn, $sql);
                         <span class="hide-menu">Home</span>
                      </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="south-city.php" aria-expanded="false">
+              <a class="sidebar-link" href="agha-khan.php" aria-expanded="false">
                 <i class="ti ti-atom"></i>
                 <span class="hide-menu">Vaccine-Reservation</span>
               </a>
             </li>
              <li class="sidebar-item">
-              <a class="sidebar-link" href="south-schedule.php" aria-expanded="false">
+              <a class="sidebar-link" href="agha-schedule.php" aria-expanded="false">
                 <i class="ti ti-atom"></i>
                 <span class="hide-menu">Schedule</span>
               </a>

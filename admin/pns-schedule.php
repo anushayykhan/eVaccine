@@ -1,9 +1,12 @@
 <?php
 include('inc.connection.php');
 
-$sql = "SELECT hospitals.*, users.name AS creator_name 
-        FROM hospitals 
-        LEFT JOIN users ON hospitals.created_by = users.id";
+$sql = "SELECT vs.*, c.name AS child_name, v.name AS vaccine_name, h.name AS hospital_name
+        FROM vaccination_schedule vs
+        LEFT JOIN children c ON vs.child_id = c.id
+        LEFT JOIN vaccines v ON vs.vaccine_id = v.id
+        LEFT JOIN hospitals h ON vs.hospital_id = h.id
+        WHERE vs.hospital_id = 3"; 
 
 $result = mysqli_query($conn, $sql);
 ?>
@@ -26,31 +29,7 @@ $result = mysqli_query($conn, $sql);
         data-sidebar-position="fixed" data-header-position="fixed">
 
         <!--  App Topstrip -->
-        <div class="app-topstrip bg-dark py-6 px-3 w-100 d-lg-flex align-items-center justify-content-between">
-            <div class="d-flex align-items-center justify-content-center gap-5 mb-2 mb-lg-0">
-                <a class="d-flex justify-content-center" href="#">
-                    <img src="assets/images/logos/logo-wrappixel.svg" alt="" width="150">
-                </a>
-
-
-            </div>
-
-            <div class="d-lg-flex align-items-center gap-2">
-                <h3 class="text-white mb-2 mb-lg-0 fs-5 text-center">Check Flexy Premium Version</h3>
-                <div class="d-flex align-items-center justify-content-center gap-2">
-
-                    <div class="dropdown d-flex">
-                        <a class="btn btn-primary d-flex align-items-center gap-1 " href="javascript:void(0)" id="drop4"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="ti ti-shopping-cart fs-5"></i>
-                            Buy Now
-                            <i class="ti ti-chevron-down fs-5"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+       
         <!-- Sidebar Start -->
         <aside class="left-sidebar">
             <!-- Sidebar scroll-->

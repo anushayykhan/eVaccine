@@ -28,9 +28,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['loginBtn'])) {
    header('Location: index.php');
   } elseif ($user['role'] === 'parent') {
     header('Location: ../webindex.php');
-  } elseif ($user['role'] === 'hospital') {
-    header('Location: index.php');
-  } else {
+  } elseif ($user['role'] === 'hospital' && $user['email'] === 'pnsshifa@gmail.com') {
+    header('Location: pns-shifa.php');
+  } elseif ($user['role'] === 'hospital' && $user['email'] === 'southcity@gmail.com') {
+    header('Location: south-city.php');
+  } elseif ($user['role'] === 'hospital' && $user['email'] === 'aghakhan@gmail.com') {
+    header('Location: agha-khan.php');
+    exit;
+}
+ else {
     $login = "Unknown role.";
     session_unset();
     session_destroy();
